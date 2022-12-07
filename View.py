@@ -142,6 +142,9 @@ class View():
     
     def setCommandSearch(self, method):
         self.btnBuscar["command"] = method
+        
+    def setCommandInsert(self, method):
+        self.bntInsert["command"] = method
     
     def resetAllFieds(self):
         self.txtidSensor.delete(0, END)
@@ -152,6 +155,8 @@ class View():
         self.txtLatitude.delete(0, END)
         self.txtLongitude.delete(0, END)
     
+    def logUpdate(self, idSensor):
+        self.lblmsg["text"] = "Sensor {} adicionado!".format(idSensor);
     
     def updateBySearch(self, sensor):
         if(sensor):
