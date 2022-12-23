@@ -145,6 +145,14 @@ class View():
         
     def setCommandInsert(self, method):
         self.bntInsert["command"] = method
+        
+    def setCommandDelete(self, method):
+        self.bntExcluir["command"] = method
+    
+    #Crie aqui o método para inserir o comando no botão de atualizar!
+    
+    def setCommandCommit(self, method):
+        self.bntAtualizarBanco["command"] = method
     
     def resetAllFieds(self):
         self.txtidSensor.delete(0, END)

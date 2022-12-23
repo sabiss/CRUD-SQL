@@ -16,7 +16,7 @@ class Banco():
         return self.cursor.fetchone()
     
     def deleteOne(self, idSensor):
-        self.cursor.execute("DELETE * FROM {} WHERE idsensor = {};".format(self.tbName, idSensor))
+        self.cursor.execute("DELETE FROM {} WHERE idsensor = {};".format(self.tbName, idSensor))
         
     def insertOne(self, idSensor, variavel, medicao, unidade, registro, latitutde, longitude):
         self.cursor.execute("INSERT INTO {} VALUES ({},'{}',{},'{}','{}',{},{}) RETURNING idSensor;".format(self.tbName, idSensor, variavel, medicao, unidade, registro, latitutde, longitude))    
@@ -24,4 +24,7 @@ class Banco():
     
     def updateOne(self, idSensor, variavel, medicao, unidade, registro, latitutde, longitude):
         self.cursor.execute("UPDATE {} SET variavel='{}', medicao={}, unidade='{}', registro={}, latitudade={}, longitude={} WHERE idSensor = {};".format(self.tbName, variavel, medicao, unidade, registro, latitutde, longitude,idSensor))
-    
+        
+    def commitChanges(self):
+        self.conn.commit()
+        

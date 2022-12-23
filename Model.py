@@ -15,3 +15,6 @@ class Model():
     
     def update_one_sensor(self, idSensor, variavel, medicao, unidade, registro, latitutde, longitude):
         self.banco.updateOne(idSensor, variavel, medicao, unidade, registro, latitutde, longitude);
+    
+    def commit_changes(self):
+        self.banco.commitChanges()
