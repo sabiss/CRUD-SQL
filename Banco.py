@@ -23,7 +23,7 @@ class Banco():
         return self.cursor.fetchone()
     
     def updateOne(self, idSensor, variavel, medicao, unidade, registro, latitutde, longitude):
-        self.cursor.execute("UPDATE {} SET variavel='{}', medicao={}, unidade='{}', registro={}, latitudade={}, longitude={} WHERE idSensor = {};".format(self.tbName, variavel, medicao, unidade, registro, latitutde, longitude,idSensor))
+        self.cursor.execute("UPDATE {} SET variavel='{}', medicao={}, unidade='{}', registro='{}', latitudade={}, longitude={} WHERE idSensor = {};".format(self.tbName, variavel, medicao, unidade, registro, latitutde, longitude,idSensor))
         
     def commitChanges(self):
         self.conn.commit()
