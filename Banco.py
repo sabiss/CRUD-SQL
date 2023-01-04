@@ -3,10 +3,11 @@ import psycopg2
 class Banco():
     
     def __init__(self, tbName):
-        self.conn = psycopg2.connect(database='pabd', 
+        self.conn = psycopg2.connect(
+                        database='Sabrina', 
                         host='localhost', 
                         user='postgres', 
-                        password='ifrn123', 
+                        password='root', 
                         port='5432')
         self.cursor = self.conn.cursor()
         self.tbName = tbName
@@ -18,13 +19,18 @@ class Banco():
     def deleteOne(self, idSensor):
         self.cursor.execute("DELETE FROM {} WHERE idsensor = {};".format(self.tbName, idSensor))
         
-    def insertOne(self, idSensor, variavel, medicao, unidade, registro, latitutde, longitude):
-        self.cursor.execute("INSERT INTO {} VALUES ({},'{}',{},'{}','{}',{},{}) RETURNING idSensor;".format(self.tbName, idSensor, variavel, medicao, unidade, registro, latitutde, longitude))    
+    def insertOne(self, idSensor, variavel, medicao, unidade, registro, latitude, longitude):
+        self.cursor.execute("INSERT INTO {} VALUES ({},'{}',{},'{}','{}',{},{}) RETURNING idSensor;".format(self.tbName, idSensor, variavel, medicao, unidade, registro, latitude, longitude))    
         return self.cursor.fetchone()
     
-    def updateOne(self, idSensor, variavel, medicao, unidade, registro, latitutde, longitude):
-        self.cursor.execute("UPDATE {} SET variavel='{}', medicao={}, unidade='{}', registro='{}', latitudade={}, longitude={} WHERE idSensor = {};".format(self.tbName, variavel, medicao, unidade, registro, latitutde, longitude,idSensor))
-        
+    def updateOne(self, idSensor, variavel, medicao, unidade, registro, latitude, longitude):
+        self.cursor.execute("UPDATE {} SET variavel='{}', medicao={}, unidade='{}', registro='{}', latitudade={}, longitude={} WHERE idSensor = {};".format(self.tbName, variavel, medicao, unidade, registro, latitude, longitude,idSensor))
+    
+    def updateBanco(self, variavel, medicao, unidade, registro, latitude, longitude, idSensor):
+        sql = "UPDATE {} SET variavel='{}', medicao={}, unidade='{}', registro='{}', latitude={}, longitude={} WHERE idsensor = {};".format(self.tbName, variavel, medicao, unidade, registro, latitude, longitude, idSensor)
+        print(sql)
+        self.cursor.execute(sql)
+
     def commitChanges(self):
         self.conn.commit()
         
