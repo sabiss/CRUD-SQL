@@ -149,8 +149,9 @@ class View():
     def setCommandDelete(self, method):
         self.bntExcluir["command"] = method
     
-    #Crie aqui o método para inserir o comando no botão de atualizar!
-    
+    def setCommandAlterar(self, method):
+        self.bntAlterar["command"] = method
+
     def setCommandCommit(self, method):
         self.bntAtualizarBanco["command"] = method
     
@@ -166,6 +167,12 @@ class View():
     def logUpdate(self, idSensor):
         self.lblmsg["text"] = "Sensor {} adicionado!".format(idSensor);
     
+    def logAtualizar(self, idSensor):
+        self.lblmsg["text"] = "Sensor {} atualizado com sucesso!".format(idSensor);
+
+    def logDelete(self, idSensor):
+        self.lblmsg["text"] = "Sensor {} deletado com sucesso!".format(idSensor);
+
     def updateBySearch(self, sensor):
         if(sensor):
             self.lblmsg["text"] = "Busca realizada"
@@ -181,3 +188,4 @@ class View():
         else:
             self.lblmsg["text"] = "Não existe esse sensor!"
             self.resetAllFieds()
+            return FALSE
