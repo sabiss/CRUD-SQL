@@ -8,7 +8,7 @@ class Controller():
         self.view.setCommandSearch(self.buscarSensor)
         self.view.setCommandInsert(self.insertSensor)
         self.view.setCommandDelete(self.deleteSensor)
-        #Chame o méotdo que que você criou para atualizar o dado aqui!
+        self.view.setCommandAlterar(self.atualizarBanco)
         self.view.setCommandCommit(self.commitBanco)
         
     def buscarSensor(self):
@@ -31,8 +31,19 @@ class Controller():
     def deleteSensor(self):
         idSensor = self.view.txtidSensor.get()
         self.model.delete_one_sensor(idSensor)
+        self.view.logDelete(idSensor)
         
-    #Crie aqui o método para atualizar os dados
+    def atualizarBanco(self):
+        idSensor = self.view.txtidSensor.get()
+        variavel = self.view.txtVariavel.get()
+        medicao = self.view.txtMedicao.get()
+        unidade = self.view.txtUnidade.get()
+        registro = self.view.txtRegistro.get()
+        latitude = self.view.txtLatitude.get()
+        longitude = self.view.txtLongitude.get()
+
+        self.model.updateBanco(variavel, medicao, unidade, registro, latitude, longitude, idSensor)
+        self.view.logAtualizar(idSensor)
         
     def commitBanco(self):
         self.model.commit_changes()
